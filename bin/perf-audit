@@ -1,0 +1,43 @@
+#! /usr/bin/env node
+
+var optimist = require('optimist'),
+    perfAudit = require('../'),
+    fs = require('fs')
+
+var argv = optimist
+  .alias('h', 'help')
+  .describe('h', 'Displays instructions.')
+
+  .alias('o', 'output')
+  .describe('o', 'Output path of the template. Defaults to stdout.')
+
+  .alias('s', 'site')
+  .describe('s', 'The URL of the website being tested, or the site ID if using SpeedCurve.')
+
+  .alias('t', 'testPlatform')
+  .describe('t', 'The plaform you wish to get stats from. Options: SpeedCurve')
+
+  .alias('a', 'apiKey')
+  .describe('a', 'The API key for your chosen platform.')
+
+  .argv
+
+if (argv.help) {
+  optimist.showHelp()
+  return process.exit(1)
+}
+
+if (!argv.site) {
+  console.log('Site must be specified.')
+  return process.exit(1)
+} else {
+  handle()
+}
+
+function handle() {
+  perfAudit(argv, function(err, md) {
+    if (err) throw err
+    if (argv.output) return fs.writeFileSync(argv.output, md)
+    console.log(md)
+  })
+}

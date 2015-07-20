@@ -1,0 +1,19 @@
+{
+  "name": "performance-audit-generator",
+  "version": "1.0.0",
+  "author": "Matthew Harrison-Jones <matt@matthojo.co.uk> (http://matthojo.co.uk/)",
+  "description": "Generates a Performance Audit template",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "preferGlobal": true,
+  "bin": {
+    "perf-audit": "bin/perf-audit"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "async": "^1.4.0",
+    "optimist": "^0.6.1",
+    "request": "^2.59.0"
+  }
+}
