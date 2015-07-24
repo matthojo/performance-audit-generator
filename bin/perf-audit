@@ -15,7 +15,7 @@ var argv = optimist
   .describe('s', 'The URL of the website being tested, or the site ID if using SpeedCurve.')
 
   .alias('t', 'testPlatform')
-  .describe('t', 'The plaform you wish to get stats from. Options: SpeedCurve')
+  .describe('t', 'The platform you wish to get stats from. Options: SpeedCurve')
 
   .alias('a', 'apiKey')
   .describe('a', 'The API key for your chosen platform.')
