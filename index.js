@@ -22,7 +22,6 @@ function perfAudit(opts, callback) {
           },
           function(err, vals) {
             if (err) throw err
-            console.log('Values:', vals)
             values = vals
             done()
           }
@@ -49,7 +48,6 @@ function generate(vals, cb) {
 }
 
 function getVals(opts, cb) {
-  console.log('Getting values from ' + opts.testPlatform + '....')
   switch (opts.testPlatform) {
     case 'SpeedCurve':
 
@@ -62,8 +60,10 @@ function getVals(opts, cb) {
 
       request({url: siteUrl}, function (err, response, body) {
         if (err) throw err
+
+        // Get latest test, normally a mobile test. There is currently no way to distinguish between test viewports.
         var parsed = JSON.parse(body),
-            testUrl = 'https://' + opts.apiKey + ':x@api.speedcurve.com/v1/tests/' + parsed.tests[parsed.tests.length - 1].test
+            testUrl = 'https://' + opts.apiKey + ':x@api.speedcurve.com/v1/tests/' + parsed.tests[0].test
 
         request({url: testUrl}, function (err, response, body) {
           if (err) throw err
