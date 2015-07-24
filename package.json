@@ -1,8 +1,8 @@
 {
-  "name": "performance-audit-generator",
+  "name": "perf-audit",
   "version": "1.0.0",
   "author": "Matthew Harrison-Jones <matt@matthojo.co.uk> (http://matthojo.co.uk/)",
-  "description": "Generates a Performance Audit template",
+  "description": "Generates a markdown Performance Audit",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
