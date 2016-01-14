@@ -73,6 +73,7 @@ function getVals(opts, cb) {
                 screenshot: parsedTest.screen,
                 url: parsedTest.url,
                 day: parsedTest.day,
+                testLocation: parsedTest.location,
                 browser: parsedTest.browser,
                 browserVersion: parsedTest.browser_version,
                 byte: parsedTest.byte,

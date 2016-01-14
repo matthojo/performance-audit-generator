@@ -5,12 +5,12 @@
 ![Loaded screenshot]( {screenshot} )
 
 
-## Loading
+## Page Load
 
 ### Test Setup
-|Device | Browser | Date
-|:------:|:-------:|:-----:|
-|{device} | {browser} v.{browserVersion} | {day}
+|Device | Browser | Date | Test Location |
+|:------:|:-------:|:-----:|:-----:|
+|{device} | {browser} v.{browserVersion} | {day} | {testLocation} |
 
 ### Test Results
 
