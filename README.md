@@ -2,7 +2,6 @@
 
 Generates a markdown Performance Audit based on the results from web page test services.
 
-**Currently only works with SpeedCurve**
 ## Install
 
 `npm install -g perf-audit`
