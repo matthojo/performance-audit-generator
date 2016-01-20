@@ -18,7 +18,9 @@ function perfAudit(opts, callback) {
           {
             site: opts.site,
             testPlatform: opts.testPlatform || '',
-            apiKey: opts.apiKey || ''
+            apiKey: opts.apiKey || '',
+            testID: opts.testID || '',
+            timeout: opts.timeout || 1800,
           },
           function(err, vals) {
             if (err) throw err

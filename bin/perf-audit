@@ -23,8 +23,8 @@ var argv = optimist
   .alias('to', 'timeout')
   .describe('to', 'Set the timeout of results requests.')
 
-  .alias('te', 'testID')
-  .describe('te', 'Request results for a specific test.')
+  .alias('i', 'testID')
+  .describe('i', 'Request results for a specific test.')
 
   .argv
 
