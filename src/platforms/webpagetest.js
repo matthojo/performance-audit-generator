@@ -1,5 +1,6 @@
 var request = require('request'),
     chalk = require('chalk'),
+    ProgressBar = require('progress'),
     WebPageTest = require('webpagetest')
 
 function webPageTest(opts, cb) {
@@ -18,12 +19,25 @@ function webPageTest(opts, cb) {
 function newTest(opts, cb) {
   var timeout = opts.timeout
   console.log(chalk.blue('Obtaining WebPageTest results, timeout is in ' + timeout + ' seconds'))
-
   var startTime = new Date().getTime()
     , wpt = new WebPageTest('www.webpagetest.org', opts.apiKey)
+    , bar = new ProgressBar(chalk.blue('[:bar] :elapsed'), { total: timeout * 10, width: 40, clear: true })
+    , timer = setInterval(function () {
+        bar.tick()
+        if (bar.complete) {
+          clearInterval(timer)
+        }
+      }, 100)
   wpt.runTest(opts.site, {pollResults: 5, timeout: timeout}, function(err, data) {
-    if (err) throw err
-    console.log(chalk.green('WebPageTest Test ID:', data.data.id))
+    if (err) {
+      if (err.error.code === 'TIMEOUT') {
+        console.log(chalk.red('\nTimeout reached :('))
+        return process.exit(1)
+      }
+
+      throw err
+    }
+    console.log(chalk.green('\nWebPageTest Test ID:', data.data.id))
     var parsedTest = data.data,
         output = {
           device: 'WebPageTest',
@@ -59,8 +73,7 @@ function newTest(opts, cb) {
           otherRequests: parsedTest.runs['1'].firstView.breakdown.other.requests,
           otherSize: (parsedTest.runs['1'].firstView.breakdown.other.bytes / 1000)
         }
-    var timeTaken = ((new Date().getTime() - startTime) / 1000) %60
-    console.log(chalk.green('Time taken: ' + timeTaken))
+    bar.tick(timeout * 10)
     cb(null, output)
   })
 }
