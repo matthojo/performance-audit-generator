@@ -38,6 +38,7 @@ Generates a markdown Performance Audit based on the results from web page test s
   ```
 
 ### WebPageTest Example
+  You will need an API key which is available from <http://www.webpagetest.org/getkey.php>.
 
   Output to console;
 
