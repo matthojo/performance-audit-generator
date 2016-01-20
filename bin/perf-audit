@@ -15,10 +15,16 @@ var argv = optimist
   .describe('s', 'The URL of the website being tested, or the site ID if using SpeedCurve.')
 
   .alias('t', 'testPlatform')
-  .describe('t', 'The platform you wish to get stats from. Options: SpeedCurve')
+  .describe('t', 'The platform you wish to get stats from. Options: SpeedCurve, WebPageTest')
 
   .alias('a', 'apiKey')
   .describe('a', 'The API key for your chosen platform.')
+
+  .alias('to', 'timeout')
+  .describe('to', 'Set the timeout of results requests.')
+
+  .alias('te', 'testID')
+  .describe('te', 'Request results for a specific test.')
 
   .argv
 
@@ -27,8 +33,8 @@ if (argv.help) {
   return process.exit(1)
 }
 
-if (!argv.site) {
-  console.log('Site must be specified.')
+if (!(argv.site || argv.testID)) {
+  console.log('A Site or Test ID must be specified.')
   return process.exit(1)
 } else {
   handle()
