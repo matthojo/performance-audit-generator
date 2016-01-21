@@ -1,4 +1,5 @@
-var request = require('request')
+var request = require('request'),
+    chalk = require('chalk')
 
 function speedCurve (opts, cb) {
   if (!opts.apiKey) {
@@ -7,14 +8,22 @@ function speedCurve (opts, cb) {
   }
 
   var siteUrl = 'https://' + opts.apiKey + ':x@api.speedcurve.com/v1/urls/' + opts.site + '?days=7'
-
   request({url: siteUrl}, function (err, response, body) {
     if (err) throw err
 
-    // Get latest test, normally a mobile test. There is currently no way to distinguish between test viewports.
     var parsed = JSON.parse(body),
-        testUrl = 'https://' + opts.apiKey + ':x@api.speedcurve.com/v1/tests/' + parsed.tests[0].test
+        testUrl = '',
+        selectedTest = null
 
+    if (parsed.tests.length === 0) {
+      console.log(chalk.red('\nNo SpeedCurve Tests in the last 7 days :('))
+      return process.exit(1)
+    }
+
+    // Get 4th test (normally a desktop test), if not available go for known test.
+    // There is currently no way to distinguish between test viewports.
+    selectedTest = parsed.tests[3] ? parsed.tests[3].test : parsed.tests[0].test
+    testUrl = 'https://' + opts.apiKey + ':x@api.speedcurve.com/v1/tests/' + selectedTest
     /* eslint complexity: 0 */
     request({url: testUrl}, function (err, response, body) {
       if (err) throw err
