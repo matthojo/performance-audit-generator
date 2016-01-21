@@ -1,10 +1,9 @@
 module.exports = perfAudit
 
-var request = require('request'),
-    fs = require('fs'),
+var fs = require('fs'),
     async = require('async')
 
-function perfAudit(opts, callback) {
+function perfAudit (opts, callback) {
   opts = opts || {}
   callback = callback || noop
 
@@ -13,55 +12,55 @@ function perfAudit(opts, callback) {
 
   async.series(
     [
-      function(done){
+      function (done) {
         getVals(
           {
             site: opts.site,
             testPlatform: opts.testPlatform || '',
             apiKey: opts.apiKey || '',
             testID: opts.testID || '',
-            timeout: opts.timeout || 120,
+            timeout: opts.timeout || 120
           },
-          function(err, vals) {
+          function (err, vals) {
             if (err) throw err
             values = vals
             done()
           }
         )
       },
-      function(done){
-        generate(values, function(err, template) {
+      function (done) {
+        generate(values, function (err, template) {
           if (err) throw err
           md = template
           done()
         })
       }
     ],
-    function(){
+    function () {
       callback(null, md)
     }
   )
 }
 
-function generate(vals, cb) {
+function generate (vals, cb) {
   var template = fs.readFileSync(__dirname + '/src/template.md', 'utf8'),
       output = replaceKeys(template, vals)
   cb(null, output)
 }
 
-function getVals(opts, cb) {
+function getVals (opts, cb) {
   switch (opts.testPlatform) {
     case 'SpeedCurve':
 
       var speedC = require('./src/platforms/speedcurve')
-      speedC(opts, function(err, vals) {
+      speedC(opts, function (err, vals) {
         if (err) throw err
         cb(null, vals)
       })
       break;
     case 'WebPageTest':
       var WPT = require('./src/platforms/webpagetest')
-      WPT(opts, function(err, vals) {
+      WPT(opts, function (err, vals) {
         if (err) throw err
         cb(null, vals)
       })
@@ -71,13 +70,13 @@ function getVals(opts, cb) {
   }
 }
 
-function replaceKeys(template, data) {
+function replaceKeys (template, data) {
   var out = template
   data = data || {}
-  Object.keys(data).forEach(function(key) {
+  Object.keys(data).forEach(function (key) {
     out = out.replace('{' + key + '}', data[key])
   })
   return out
 }
 
-function noop(){}
+function noop () {}
