@@ -8,16 +8,16 @@
 ## Page Load
 
 ### Test Setup
-|Device | Browser | Date | Test Location |
-|:------:|:-------:|:-----:|:-----:|
-|{device} | {browser} v.{browserVersion} | {day} | {testLocation} |
+| Service | Browser | Date | Test Location | Connectivity | Latency |
+|:------:|:-------:|:-----:|:-----:|:-----:|:-----:|
+| {service} | {browser} v.{browserVersion} | {date} | {testLocation} | {connectivity} | {latency} |
 
 ### Test Results
 
 #### Page Numbers
-|First Byte (ms) | Start Render (ms) | DOM complete (ms) | Loaded (ms) | No. Requests | Assets Size |
-|:------:|:------:|:------:|:------:|:------:|:------:|
-|{byte} | {render} | {dom} | {loaded} | {requests} | {size} kb |
+| First Byte (ms) | Start Render (ms) | DOM complete (ms) | DOM Elements | Loaded (ms) | No. Requests | Assets Size (kb) |
+|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
+| {ttfb} | {render} | {dom} | {domCount} | {loaded} | {requests} | {size} |
 
 
 #### Scores
@@ -31,20 +31,20 @@ _* Speed Index is the average time at which visible parts of the page are displa
 
 ## Optimisations
 
-| Image Saving* |
-|:------:|
-| {imageSaving} kb |
+| Image Savings* (kb) | Gzip Savings (bytes) | Minify Savings (bytes) |
+|:------:|:------:|:------:|
+| {imageSaving} | {gzipSaving} | {minifySaving} |
 
-_*Saving that could be made by converting Jpegs to progressive 85 quality and stripping metadata from PNG’s_
+_*Savings that could be made by converting `.jpeg` files to progressive 85 quality and stripping metadata from `.png` files._
 
 ### Request Breakdown
-| Request | Number of Requests | Size |
+| Request | Number of Requests | Size (kb) |
 |:------:|:------:|:------:|
-| HTML | {htmlRequests} | {htmlSize} kb |
-| CSS | {cssRequests} | {cssSize} kb |
-| JS | {jsRequests} | {jsSize} kb |
-| Image | {imageRequests} | {imageSize} kb |
-| Font | {fontRequests} | {fontSize} kb |
-| Text | {textRequests} | {textSize} kb |
-| Flash | {flashRequests} | {flashSize} kb |
-| Other | {otherRequests} | {otherSize} kb |
+| HTML | {htmlRequests} | {htmlSize} |
+| CSS | {cssRequests} | {cssSize} |
+| JS | {jsRequests} | {jsSize} |
+| Image | {imageRequests} | {imageSize} |
+| Font | {fontRequests} | {fontSize} |
+| Text | {textRequests} | {textSize} |
+| Flash | {flashRequests} | {flashSize} |
+| Other | {otherRequests} | {otherSize} |

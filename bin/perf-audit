@@ -22,6 +22,7 @@ var argv = optimist
 
   .alias('to', 'timeout')
   .describe('to', 'Set the timeout of WebPageTest results requests (seconds). Default: 120')
+  .default('to', 120)
 
   .alias('i', 'testID')
   .describe('i', 'Request results for a specific WebPageTest test.')
