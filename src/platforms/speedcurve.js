@@ -6,7 +6,7 @@ function speedCurve (opts, cb) {
     return process.exit(1)
   }
 
-  var siteUrl = 'https://' + opts.apiKey + ':x@api.speedcurve.com/v1/urls/' + opts.site
+  var siteUrl = 'https://' + opts.apiKey + ':x@api.speedcurve.com/v1/urls/' + opts.site + '?days=7'
 
   request({url: siteUrl}, function (err, response, body) {
     if (err) throw err
