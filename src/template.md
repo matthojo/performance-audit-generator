@@ -2,7 +2,7 @@
 
 {url}
 
-![Loaded screenshot]( {screenshot} )
+![Loaded screenshot]({screenshot})
 
 
 ## Page Load
@@ -15,10 +15,13 @@
 ### Test Results
 
 #### Page Numbers
-| First Byte (ms) | Start Render (ms) | DOM complete (ms) | DOM Elements | Loaded (ms) | No. Requests | Assets Size (kb) |
-|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
-| {ttfb} | {render} | {dom} | {domCount} | {loaded} | {requests} | {size} |
+| First Byte | Start Render | DOM complete | Fully Loaded |
+|:------:|:------:|:------:|:------:|
+| {ttfb}s | {render}s | {dom}s  | {loaded}s |
 
+| DOM Elements |  No. Requests | Assets Size (kb) |
+|:------:|:------:|:------:|
+| {domCount} | {requests} | {size} |
 
 #### Scores
 
